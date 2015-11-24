@@ -2,33 +2,16 @@
 	<div >
    	 	<table>
 		  <tr>
-		    <td>
-		    	<div>
-
-		    		<div class = "form-group" ng-controller = "controller1">
-
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    				<p> {{sentence}}</p>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
-		    			
-		    		</div>
-
-		    	</div>
-
+		    <td>	    
 
 		    </td>
-		    <td></td> 
+		    <td>
+		    </td> 
 
 
 		    <td>
 
-		    		<div class = "form-group" ng-controller = "controller2">
 
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    				<p> {{sentence}}</p>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
-		    			
-		    		</div>
 
 		    </td>
 
@@ -39,17 +22,30 @@
 		    <td></td>
 
 		    <td>
-		    	<div>
+		    	
+		    	<div class = "form-group" ng-controller = "controller0">
 
-		    		<div>
-
-		    			<textarea class = "myForm" rows = "4"></textarea>
-		    			<p></p>
-		    			<input type="submit" ng-click="addSentence()"/>
+		    		<div ng-if = "submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "firstSentence()" />
 		    			
-		    		</div>	
+		    		</div>
+
+		    		<div ng-if = "submitted == true" ng-model = "sentenceData.content">
+		    			<a href = "#"> {{sentenceData.content}}</a>
+		    			<p></p>
+		 				<button type = "submit" ng-click = "editSentence()" > Change </button>
+		    		</div>
+
+		    		<div ng-if = "submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" />
+		    			
+		    		</div>
 
 		    	</div>
+
+		    	
 
 		    </td> 
 
@@ -59,31 +55,13 @@
 
 		  <tr>
 		    <td>
-		    	<div>
+		    	
 
-		    		<div class = "form-group" ng-controller = "controller3">
-
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    				<p> {{sentence}}</p>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
-		    			
-		    		</div>
-
-		    	</div>
 		    </td>
 		    <td></td> 
+
 		    <td>
-		    	<div>
-
-		    		<div class = "form-group" ng-controller = "controller4">
-
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    				<p> {{sentence}}</p>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
-		    			
-		    		</div>
-
-		    	</div>
+		    	
 		    </td>
 		  </tr>
 		</table>
