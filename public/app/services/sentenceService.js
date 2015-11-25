@@ -14,8 +14,16 @@ angular.module('sentenceService', [])
 
 	sentenceFactory.all = function() {
 
-		return $http.get('/api/sentences/');
+		return $http.get('/api/sentences/all');
 	};
+
+	//get first sentence
+
+	sentenceFactory.first = function() {
+
+		return $http.get('/api/sentences/start');
+	};
+
 
 	// create a sentence
 
@@ -36,6 +44,13 @@ angular.module('sentenceService', [])
 	sentenceFactory.delete = function(id) { 
 
 		return $http.delete('/api/sentences/' + id);
+	};
+
+	// get branches
+
+	sentenceFactory.branch = function(id) { 
+
+		return $http.get('/api/sentences/' + id + '/branches');
 	};
 
 

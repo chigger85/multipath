@@ -1,10 +1,33 @@
-angular.module('mainCtrl', [])
+angular.module('quadCtrl', ['sentenceService'])
 
-.controller('mainController', ["$scope", function($scope) {
+.controller('quadController', ["$scope", "Sentence", "$routeParams", function($scope, Sentence, $routeParams) {
 
-	var vm = this;
+	$scope.submitted = "";
+	$scope.edit = false;
+	$scope.sentences = {};
+	$scope.origin_id = $routeParams.sentence_id;
+	console.log($scope.origin_id);
 
-	vm.submitted = false;
+
+	$scope.refresh = function() {
+
+
+
+		Sentence.branch($scope.origin_id).success(function(data) {
+
+			console.log(data)
+			
+				
+
+
+
+		
+
+		});
+	}
+
+	$scope.refresh();
+	
 	
 
 

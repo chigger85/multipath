@@ -13,7 +13,7 @@ angular.module('app.routes', ['ngRoute'])
     // get rid of the hash in the URL
 
     .when('/:sentence_id', {
-      templateUrl : 'app/views/pages/story.html',
+      templateUrl : 'app/views/pages/home.html',
       controller : "mainController",
       controllerAs: "mainController as main"
       

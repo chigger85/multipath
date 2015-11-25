@@ -5,12 +5,11 @@ var Schema       = mongoose.Schema;
 var SentenceSchema = new Schema({
 
 	content: String,
-	branche1: { type: Schema.Types.ObjectId, ref: 'Sentence' },
-	branche2: { type: Schema.Types.ObjectId, ref: 'Sentence' },
-	branche3: { type: Schema.Types.ObjectId, ref: 'Sentence' },
-	branche4: { type: Schema.Types.ObjectId, ref: 'Sentence' },
+	origin: { type: Schema.Types.ObjectId, ref: 'Sentence' },
+	start: Boolean,
+	node: Number
+});
 
-})
 
 
 module.exports = mongoose.model('Sentence', SentenceSchema);

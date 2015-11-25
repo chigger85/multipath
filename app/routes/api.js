@@ -19,29 +19,49 @@ module.exports = function(app, express) {
 	});
 
 
+	apiRouter.route('/sentences/all')
 
-	apiRouter.route('/sentences')
+
+	.get(function(req, res) {
+		
+		Sentence.find(function(err, sentences) {
+			if (err) return res.send(err);
+
+			// return the users
+			res.json(sentences);
+
+		})
+
+		
+	})
+
+
+
+	apiRouter.route('/sentences/start')
 
 
 		.get(function(req, res) {
-			Sentence.find(function(err, sentences) {
+			
+			Sentence.find({"start": true}, function(err, sentences) {
 				if (err) return res.send(err);
 
 				// return the users
 				res.json(sentences);
-			});
+
+			})
+
+			
 		})
 
 		.post(function(req,res) {
 
 			var sentence = new Sentence();
 			sentence.content = req.body.content;
-			sentence.branche1 = req.body.branche1;
-			sentence.branche2 = req.body.branche2;
-			sentence.branche3 = req.body.branche3;
-			sentence.branche4 = req.body.branche4;
+			sentence.origin = req.body.origin;
+			sentence.node = req.body.node;
+			sentence.start= req.body.start;
 
-
+           
 			sentence.save(function(err) {
 				//if (err) return res.send(err);
 				if (err) {
@@ -49,12 +69,14 @@ module.exports = function(app, express) {
 					}
 	 
 	 			// return a message
-	 			res.json({ message: 'sentence created!' });
+	 			res.json({ message: 'sentence created!' , posted: sentence});
 	 			})
 	 		});
 
 				
+	apiRouter.route('/sentences/:sentence_id')
 
+		.get
 
 
 
@@ -80,6 +102,8 @@ module.exports = function(app, express) {
 				// return that sentence
 				res.json(sentence);
 			});
+
+
 		})
 
 
@@ -91,10 +115,10 @@ module.exports = function(app, express) {
 
 				// set the new user information if it exists in the request
 				if (req.body.content) sentence.content = req.body.content;
-				if (req.body.branche1) sentence.branches = req.body.branche1;
-				if (req.body.branche2) sentence.branches = req.body.branche2;
-				if (req.body.branche3) sentence.branches = req.body.branche3;
-				if (req.body.branche4) sentence.branches = req.body.branche4;
+				if (req.body.origin) sentence.origin= req.body.origin;
+				if (req.body.node) sentence.node = req.body.node;
+				if (req.body.start) sentence.start= req.body.start;
+				
 
 				sentence.save(function(err) {
 				//if (err) return res.send(err);
@@ -106,7 +130,28 @@ module.exports = function(app, express) {
 	 			res.json({ message: 'sentence updated!' });
 	 			})
 	 		});
+		});
+
+
+		apiRouter.route('/sentences/:sentence_id/branches')
+
+		.get(function(req,res) {
+
+			console.log(req.params.sentence_id);
+
+			Sentence.find({"origin": req.params.sentence_id}, function(err, sentence){
+
+				if (err) return res.send(err);
+
+				// return that sentence
+				res.json(sentence);
 			});
+
+
+		});
+			
+
+
 
 
 		return apiRouter
