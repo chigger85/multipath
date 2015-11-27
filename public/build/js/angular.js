@@ -1,5 +1,14 @@
 angular.module('mainCtrl', ['sentenceService']) 
 
+.run( ["$rootScope", "$location", function($rootScope, $location) {
+   $rootScope.$watch(function() { 
+      return $location.path(); 
+    },
+    function(a){  
+      console.log('url has changed: ' + a);
+      // show loading div, etc...
+    });
+}])
 
 .controller('mainController', ["$location", "Sentence", "$routeParams", function($location, Sentence, $routeParams) {
 
@@ -13,6 +22,14 @@ angular.module('mainCtrl', ['sentenceService'])
 
 
 	vm.refresh = function() {
+
+		// Sentence.first().success(function(data) {
+
+		// 			if(data) {vm.firstId = data[0]._id};
+					
+
+		// 		})
+
 
 		
 
@@ -51,10 +68,17 @@ angular.module('mainCtrl', ['sentenceService'])
 			else if ($routeParams.sentence_id == vm.firstId) {
 
 				vm.start = true;
+				Sentence.first().success(function(data) {
+
+					vm.sentenceData = data[0];
+					vm.firstId = data[0]._id;
+	
+
+				})
 			}
 		
 
-			else if ($routeParams.sentence_id && $routeParams.sentence_id !== vm.firstId ) {
+			else if ($routeParams.sentence_id !== vm.firstId ) {
 
 				vm.start = false;
 				vm.submitted = true;
