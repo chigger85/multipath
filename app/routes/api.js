@@ -35,23 +35,20 @@ module.exports = function(app, express) {
 		
 	})
 
+// delete the sentence with this id
+	.delete(function(req, res) {
+		
+		Sentence.remove({}, function(err, sentence) {
+			if (err) return res.send(err);
+
+			res.json({ message: 'All sentences deleted' });
+		});
+	})
 
 
-	apiRouter.route('/sentences/start')
 
 
-		.get(function(req, res) {
-			
-			Sentence.find({"start": true}, function(err, sentences) {
-				if (err) return res.send(err);
-
-				// return the users
-				res.json(sentences);
-
-			})
-
-			
-		})
+	apiRouter.route('/sentences')
 
 		.post(function(req,res) {
 
@@ -73,10 +70,25 @@ module.exports = function(app, express) {
 	 			})
 	 		});
 
-				
-	apiRouter.route('/sentences/:sentence_id')
 
-		.get
+
+
+	apiRouter.route('/sentences/start')
+
+
+		.get(function(req, res) {
+			
+			Sentence.find({"start": true}, function(err, sentences) {
+				if (err) return res.send(err);
+
+				// return the users
+				res.json(sentences);
+
+			})
+
+			
+		})
+
 
 
 
@@ -133,21 +145,23 @@ module.exports = function(app, express) {
 		});
 
 
-		apiRouter.route('/sentences/:sentence_id/branches')
+		apiRouter.route('/sentences/branch/:origin_id/:node')
 
 		.get(function(req,res) {
 
-			console.log(req.params.sentence_id);
+			console.log(req.params.origin_id);
 
-			Sentence.find({"origin": req.params.sentence_id}, function(err, sentence){
+			Sentence.find({$and: [{"origin": req.params.origin_id},{"node": req.params.node}]}, function(err, data){
 
 				if (err) return res.send(err);
 
+
+
 				// return that sentence
-				res.json(sentence);
+				res.json(data)
+
+
 			});
-
-
 		});
 			
 

@@ -16,17 +16,18 @@ th, td {
 .myForm {
 
 	width:80%; 
-    margin-left:10%; 
-    margin-right:10%;
-    border:solid 1px gray;	
-    font-family: garamond;
+  margin-left:10%; 
+  margin-right:10%;
+  border:solid 1px gray;	
+  font-family: garamond;
 
 }
 
 .sentence {
 
-   font-size: 16px;
-   font-family: garamond;
+  text-align: justify;
+  font-size: 18px;
+  font-family: garamond;
 
 }
 
@@ -39,8 +40,28 @@ th, td {
 
 }
 
+.warning{
+
+  color: red;
+
+  
+
+}
+
 .submit{
 
     font-size: 10px;
+}
+
+.start{
+
+
+   font-family: garamond;
+
+}
+
+.control{
+
+  color:gray;
 }
 

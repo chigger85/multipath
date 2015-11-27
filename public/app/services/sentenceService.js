@@ -48,9 +48,14 @@ angular.module('sentenceService', [])
 
 	// get branches
 
-	sentenceFactory.branch = function(id) { 
+	sentenceFactory.branch = function(id,node) { 
 
-		return $http.get('/api/sentences/' + id + '/branches');
+		return $http.get('/api/sentences/branch/' + id + '/'+node);
+	};
+
+	sentenceFactory.deleteAll = function() { 
+
+		return $http.delete('/api/sentences/all');
 	};
 
 

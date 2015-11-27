@@ -1,38 +1,64 @@
 <div class="jumbotron text-center">
 	<div >
+
    	 	<table>
 		  <tr>
 		    <td>
-		    	<div class = "form-group" ng-controller = "quadController">
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(0)">
 
-		    		<div ng-if = "main.submitted == true">
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+
 		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
-		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence()" class = "submit" />
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(0)" class = "submit"/>
 		    			
 		    		</div>
 
-		    		<!-- <div ng-if = "main.submitted == true" ng-model = "main.sentenceData">
-		    			<a href = "#" class = "sentence"> {{main.sentenceData.content}}</a>
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
 		    			<p></p>
-		 				<button type = "submit" ng-click = "main.editSentence(main.sentenceData._id)" class = "change" > Change </button>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
 		    		</div>
-
-		    		<div ng-if = "main.submitted == false && main.edit == true">
-		    			<textarea class = "myForm" rows = "4"  ng-model = "main.sentenceData.content" spellcheck="true"></textarea>
-		    			<input type="submit" id="submit" value="Update" ng-click = "main.updateSentence()" class = "submit" />
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
 		    			
-		    		</div> -->
+		    		</div> 
 
 		    	</div>
 
 		        
 
 		    </td>
-		    <td>
-		    </td> 
+
+		    <td> <h3 class = "start">Begin your Story! </h3> </td> 
 
 
 		    <td>
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(1)">
+
+
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(1)" class = "submit"/>
+		    			
+		    		</div>
+
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
+		    			<p></p>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
+		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
+
+		    	</div>
 
 
 
@@ -54,15 +80,15 @@
 		    			
 		    		</div>
 
-		    		<div ng-if = "main.submitted == true" ng-model = "main.sentenceData">
-		    			<a href = "#" class = "sentence"> {{main.sentenceData.content}}</a>
+		    		<div ng-if = "main.submitted == true && main.edit == false" ng-model = "main.sentenceData">
+		    			<a href = "/{{main.sentenceData._id}}" class = "sentence"> {{main.sentenceData.content}}</a>
 		    			<p></p>
 		 				<button type = "submit" ng-click = "main.editSentence(main.sentenceData._id)" class = "change" > Change </button>
 		    		</div>
 
-		    		<div ng-if = "main.submitted == false && main.edit == true">
+		    		<div ng-if = "main.edit == true">
 		    			<textarea class = "myForm" rows = "4"  ng-model = "main.sentenceData.content" spellcheck="true"></textarea>
-		    			<input type="submit" id="submit" value="Update" ng-click = "main.updateSentence()" class = "submit" />
+		    			<input type="submit" id="submit" value="Update" ng-click = "main.updateSentence(main.sentenceData._id, main.sentenceData)" class = "submit" />
 		    			
 		    		</div>
 
@@ -78,12 +104,59 @@
 
 		  <tr>
 		    <td>
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(2)">
+
+
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(2)" class = "submit"/>
+		    			
+		    		</div>
+
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
+		    			<p></p>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
+		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
+
+		    	</div>
 		    	
 
 		    </td>
 		    <td></td> 
 
 		    <td>
+
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(3)">
+
+
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(3)" class = "submit"/>
+		    			
+		    		</div>
+
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
+		    			<p></p>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
+		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
+
+		    	</div>
 		    	
 		    </td>
 		  </tr>

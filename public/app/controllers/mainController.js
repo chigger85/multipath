@@ -1,53 +1,92 @@
-angular.module('mainCtrl', ['sentenceService'])
+angular.module('mainCtrl', ['sentenceService']) 
 
 
-.controller('mainController', ['$scope',  "$location", "Sentence", function($scope, $location, Sentence) {
+.controller('mainController', ["$location", "Sentence", "$routeParams", function($location, Sentence, $routeParams) {
 
 	var vm  = this;
+
 
 	vm.submitted = false;
 	vm.edit = false;
 	vm.origin = false;
-	
-	
+	vm.sentenceData = {};
 
 
 	vm.refresh = function() {
 
-	
+		
 
 		Sentence.all().success(function(data) {
 
-		
+			if (data.length == 0) {
 
-
-			if (data.length > 0) {
-
-				vm.submitted = true;
-				vm.sentenceData = data[0];
-				$location.path('/'+data[0]._id)
-
-				
-
-			}
-
-			if (data == 0) {
-
+				vm.start = true;
+				vm.sentenceData = {};
 				vm.submitted = false;
 				vm.setOrigin = true;
+				$location.path('/')
 				
 
+			}	
+
+
+			else if  (!$routeParams.sentence_id && data.length > 0) {
+
+				vm.start = true;
+
+				vm.submitted = true;
+				vm.setOrigin = false;
+
+				Sentence.first().success(function(data) {
+
+					vm.sentenceData = data[0];
+					vm.firstId = data[0]._id;
+					$location.path('/'+vm.sentenceData._id);
+
+				})
+				
 			}
 
+					
+			else if ($routeParams.sentence_id == vm.firstId) {
+
+				vm.start = true;
+			}
 		
 
+			else if ($routeParams.sentence_id && $routeParams.sentence_id !== vm.firstId ) {
 
+				vm.start = false;
+				vm.submitted = true;
+				vm.setOrigin = false;
+				Sentence.get($routeParams.sentence_id).success(function(data) {
 
+					vm.sentenceData = data;
+				})
+
+			}
 			
 		});
-	}
+
+		
+	};
 
 	vm.refresh();
+	
+
+
+	vm.deleteAll = function() {
+
+		Sentence.deleteAll().success(function(data) {
+
+			$location.path('/');
+			vm.refresh();
+		
+
+		})
+	}
+	
+
 
 
 
@@ -67,22 +106,23 @@ angular.module('mainCtrl', ['sentenceService'])
 			vm.message = data.message
 			vm.sentenceData = data.posted
 			
-			$location.path('/'+data.posted._id)
 
+			vm.refresh()
 
-			
 
 
 		});
 
-		vm.refresh()	
+			
 	} 
 
 
 	vm.editSentence = function(id) {
 
-		vm.submitted = false;
+		
 		vm.edit = true;
+		vm.submitted = false;
+		
 		
 
 		Sentence.get(id).success(function(data) {
@@ -93,16 +133,14 @@ angular.module('mainCtrl', ['sentenceService'])
 		})
 
 
-
 	}
 
-	vm.updateSentence = function() {
+
+	vm.updateSentence = function(id,content) {
 
 		
 
-		
-
-		Sentence.update(vm.sentenceData._id, vm.sentenceData).success(function(data) {
+		Sentence.update(id, content).success(function(data) {
 
 			vm.submitted = true;
 			vm.edit = false;

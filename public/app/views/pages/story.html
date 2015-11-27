@@ -2,41 +2,67 @@
 	<div >
    	 	<table>
 		  <tr>
-		    <td>	    	
+		    <td>
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(0); main.refresh()">
 
-	    		<div class = "form-group" ng-controller = "controller1">
 
-	    			<div ng-if = "submitted == false">
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(0)" class = "submit"/>
+		    			
 		    		</div>
 
-		    		<div ng-if = "submitted == true">
-		    			<a href = "#"> {{sentence}} </a>
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence" ng-click = "refresh(0)"> {{sentenceData.content}}</a>
 		    			<p></p>
-		 				<button type = "submit" ng-click = "changeSentence()" > edit </button>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
 		    		</div>
-	    			
-	    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
+
+		    	</div>
+
+		        
 
 		    </td>
-		    <td></td> 
+
+		    <td> 
+		    	<div ng-if = "main.start == false">
+		    		<button type = "submit"> <span> <a href = "/" class = "control sentence"> Back to Start </a> </span> </button>
+		    	</div> 
+
+		    	<button type = "submit" class = "warning change" ng-click = "main.deleteAll()" > Delete All </button>
+
+		 	</td> 
 
 
 		    <td>
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(1); main.refresh()">
 
-		    	<div class = "form-group" ng-controller = "controller1">
 
-		    		<div ng-if = "submitted == false">
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(1)" class = "submit"/>
+		    			
 		    		</div>
 
-		    		<div ng-if = "submitted == true">
-		    			<a href = "#"> {{sentence}} </a>
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
 		    			<p></p>
-		 				<button type = "submit" ng-click = "changeSentence()" > edit </button>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
 		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
 
 		    	</div>
 
@@ -48,23 +74,34 @@
 
 
 		  <tr>
-		    <td></td>
+		    <td>
+
+		    	<div ng-if = "main.start == false">
+		    		<button type = "submit"> <span> <a href = "/" class = "control sentence"> Back one </a> </span> </button>
+		    	</div> 
+
+		    </td>
 
 		    <td>
+		    	
 		    	<div class = "form-group">
 
-		    		<div ng-if = "submitted == false">
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
+
+		    		<div ng-if = "main.submitted == true" ng-model = "main.sentenceData.content">
+		    			<a href = "/{{main.sentenceData._id}}" class = "sentence"> {{main.sentenceData.content}}</a>
+		    			<p></p>
+		 				<button type = "submit" ng-click = "main.editSentence(main.sentenceData._id)" class = "change" > Change </button>
 		    		</div>
 
-		    		<div ng-if = "submitted == true">
-		    			<a href = "#"> {{sentence}} </a>
-		    			<p></p>
-		 				<button type = "submit" ng-click = "changeSentence()" > edit </button>
+		    		<div ng-if = "main.submitted == false && main.edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "main.sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "main.updateSentence(main.sentenceData._id, main.sentenceData)" class = "submit" />
+		    			
 		    		</div>
 
 		    	</div>
+
+		    	
 
 		    </td> 
 
@@ -74,39 +111,60 @@
 
 		  <tr>
 		    <td>
-		    	<div class = "form-group" ng-controller = "controller1">
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(2); main.refresh()">
 
-		    		<div ng-if = "submitted == false">
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
+
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(2)" class = "submit"/>
+		    			
 		    		</div>
 
-		    		<div ng-if = "submitted == true">
-		    			<a href = "#"> {{sentence}} </a>
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
 		    			<p></p>
-		 				<button type = "submit" ng-click = "changeSentence()" > edit </button>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
 		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
 
 		    	</div>
+		    	
 
 		    </td>
 		    <td></td> 
 
 		    <td>
-		    	<div class = "form-group" ng-controller = "controller1">
 
-		    		<div ng-if = "submitted == false">
-		    			<textarea class = "myForm" rows = "4" ng-model = "input"></textarea>
-		    			<input type="submit" ng-click="saveSentence(input)"/>
+		    	<div class = "form-group" ng-controller = "quadController" ng-init = "refresh(3); main.refresh()">
+
+
+
+		    		<div ng-if = "main.submitted == true && submitted == false && edit == false">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"> </textarea>
+		    			<input type="submit" id="submit" value="Submit" ng-click = "addSentence(); refresh(3)" class = "submit"/>
+		    			
 		    		</div>
 
-		    		<div ng-if = "submitted == true">
-		    			<a href = "#"> {{sentence}} </a>
+		    		<div ng-if = "main.submitted == true && submitted == true">
+		    			<a href = "/{{sentenceData._id}}" class = "sentence"> {{sentenceData.content}}</a>
 		    			<p></p>
-		 				<button type = "submit" ng-click = "changeSentence()" > edit </button>
+		 				<button type = "submit" ng-click = "editSentence(sentenceData._id)" class = "change" > Change </button>
 		    		</div>
+ 
+		    		 <div ng-if = "main.submitted == true && submitted == false && edit == true">
+		    			<textarea class = "myForm" rows = "4"  ng-model = "sentenceData.content" spellcheck="true"></textarea>
+		    			<input type="submit" id="submit" value="Update" ng-click = "updateSentence()" class = "submit" />
+		    			
+		    		</div> 
 
 		    	</div>
+		    	
 		    </td>
 		  </tr>
 		</table>

@@ -1,6 +1,6 @@
 angular.module('app.routes', ['ngRoute']) 
 
-.config(function($routeProvider, $locationProvider) {
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   
   	$routeProvider
     // home page route
@@ -13,7 +13,7 @@ angular.module('app.routes', ['ngRoute'])
     // get rid of the hash in the URL
 
     .when('/:sentence_id', {
-      templateUrl : 'app/views/pages/home.html',
+      templateUrl : 'app/views/pages/story.html',
       controller : "mainController",
       controllerAs: "mainController as main"
       
@@ -24,6 +24,6 @@ angular.module('app.routes', ['ngRoute'])
 
 
 
-});
+}]);
 
   	
